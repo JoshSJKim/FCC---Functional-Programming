@@ -113,3 +113,42 @@ console.log(triple(5)); // 15
 
 - I need more time to wrap my head around this
 
+## Understand the Hazards of Using Imperative Code
+
+- Functional programming is a good habit to develop.
+  - It keeps the code easy to manage.
+  - Prevents unintended bugs and errors.
+  - Functional programming is a form of declarative programming.
+  - It means that you tell the computer what you want done by calling a method or a function.
+
+- Imperative programming is a bit different.
+  - It give the computer a set of statements to perform a task.
+  - You need to write out all the statements in order to achieve the desired outcome.
+  - This means that it's prone to errors in the code, such as 'off by one errors' and semantic errors.
+  - You could even use 'splice' instead of 'slice' which will produce a very different outcome.
+
+Following are some examples of known hazards of using imperative coding
+
+- State complexity:
+  - Imperative code often requires the programmer to keep track of the program's state.
+  - It can become complex as the program grows in size and complexity.
+  - This can make it difficult to debug and maintain the code over time.
+
+- Race conditions:
+  - In imperative code, multiple processes or threads may access and modify shared data simultaneously.
+  - It could lead to race conditions and unpredictable behavior.
+
+- Mutable data:
+  - Imperative code often relies on mutable data.
+  - It can lead to unintended side effects and make it difficult to reason about the behavior of the code.
+
+- Code duplication:
+  - Imperative code can be verbose and repetitive, leading to code duplication and increased maintenance overhead.
+
+- Difficulty of optimization:
+  - Imperative code can be difficult to optimize because it relies on explicit control flow and state management.
+  - It can make it harder for compilers to optimize the code.
+
+- Readability and understandability:
+  - Imperative code can be difficult to read and understand.
+  - This is particularly true for novice programmers who may struggle to follow the control flow and state changes in the code.

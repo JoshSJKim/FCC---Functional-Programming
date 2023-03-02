@@ -220,3 +220,74 @@ let increasedValue = incrementer(fixedValue);
 console.log(increasedValue);    // console will display 5
 console.log(fixedValue);        // global variable 'fixedValue' is unaffected and console displays 4
 ```
+
+## Refactor Global Variables Out of Functions
+
+- Remember the two principles for functional programming discussed so far.
+  - Do not alter variable or object
+  - Declare function parameters
+
+- Remember declaring a new variable to copy a global variable (for example ```let newArr = bookList```) will not make a 'copy' of the original array.
+  - It will simply create a reference to the existing variable specified.
+  - Any changes made to 'newArr' will also affect the global variable 'bookList'.
+
+```js
+// The global variable
+const bookList = ["The Hound of the Baskervilles", "On The Electrodynamics of Moving Bodies", "Philosophiæ Naturalis Principia Mathematica", "Disquisitiones Arithmeticae"];
+
+// Change code below this line
+function add(bookName) {
+
+  bookList.push(bookName);
+  return bookList;
+  
+  // Change code above this line
+}
+
+// Change code below this line
+function remove(bookName) {
+  const book_index = bookList.indexOf(bookName);
+  if (book_index >= 0) {
+
+    bookList.splice(book_index, 1);
+    return bookList;
+
+    // Change code above this line
+    }
+}
+```
+
+- Rewrite the above code so that the global array 'bookList' is not mutated inside either function 'add' or 'remove'.
+
+
+```js
+// The global variable
+const bookList = ["The Hound of the Baskervilles", "On The Electrodynamics of Moving Bodies", "Philosophiæ Naturalis Principia Mathematica", "Disquisitiones Arithmeticae"];
+
+// Change code below this line
+function add(list, bookName) {      // add parameters to function to receive an array and a bookName
+  let addedArr = list.slice(0);     // Use .slice(0) to copy the 'list' passed to the function.
+  addedArr.push(bookName);          // spread operator [...list] would also work
+  return addedArr;
+  
+  // Change code above this line
+}
+
+// Change code below this line
+function remove(list, bookName) {
+  let removedArr = list.slice(0);   // spread operator [...list] would also work
+  const book_index = removedArr.indexOf(bookName);  // you can simplify this. Remove this line of code.
+  if (book_index >= 0) {                            // if (removedArr.indexOf(bookName) >= 0) {
+                                                    //   removedArr.splice(removedArr.indexOf(bookName), 1);
+    removedArr.splice(book_index, 1);               // remove this line of code
+    return removedArr;
+    // Change code above this line
+    }
+}
+
+let addedList = add(bookList, "A Brief History of Time");
+let removedList = remove(bookList, "The Hound of the Baskervilles");
+console.log(bookList);      // global array 'bookList' is unaffected
+console.log(addedList);     // "A Brief History of Time" added to the list
+console.log(removedList);   // "The Hound of the Baskervilles" removed from list
+```

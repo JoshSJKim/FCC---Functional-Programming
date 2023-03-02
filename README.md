@@ -152,3 +152,44 @@ Following are some examples of known hazards of using imperative coding
 - Readability and understandability:
   - Imperative code can be difficult to read and understand.
   - This is particularly true for novice programmers who may struggle to follow the control flow and state changes in the code.
+
+## Avoid Mutations and Side Effects Using Functional Programming
+
+- One of the core principles of functional programming is not to change things.
+- Changes lead to bugs and errors.
+- If you don't change anything - objects, function arguments, or variables - you could prevent unexpected results.
+
+- Changing/altering is called 'mutation' and the outcome of that 'mutation' is called 'side-effects'.
+- A function, ideally, should be a pure function, meaning, it should not cause any side effects.
+
+```js
+let fixedValue = 4;
+function incrementer() {
+
+}
+```
+
+- Write a code so that it returns the value of the global variable (fixedValue) increased by 1.
+- The result should not mutate the original global variable.
+
+```js
+function incrementer() {
+    return fixedValue += 1; // This was my first response, out of instinct, based on what I know and understand so far.
+}
+```
+
+```js
+function incrementer() {
+    let newValue = fixedValue;  // This was my second attempt. Trying not to mutate the original variable.
+    return newValue += 1;       // Instinctively, declare a new variable and assign the original to it.
+}                               // This worked, but this is imperative coding
+```
+
+```js
+function incrementer() {
+    return fixedValue + 1; // Simply add 1 to the original variable. It does not mutate it, and it achieves the task of the challenge.
+}
+```
+
+- I realize that excess information input has clouded my mind.
+- I guess that is the point of this exercise. Keep things simple. Understand the problem and the goal of the challenge.

@@ -193,3 +193,30 @@ function incrementer() {
 
 - I realize that excess information input has clouded my mind.
 - I guess that is the point of this exercise. Keep things simple. Understand the problem and the goal of the challenge.
+
+## Pass Arguments to Avoid External Dependence in a function
+
+- In the previous challenge, the global variable was not altered, as intended.
+- But the function 'incrementer' would not work without the global variable 'fixedValue' being present in the function.
+- Another principle of functional programming is to always declare your dependencies explicitly.
+  - In other words, if a function depends on a variable or an object for the function to work,
+  - pass that variable or object directly into the function as an argument.
+- By doing so,
+  - The function is easier to test
+  - You know exactly what input the function takes
+  - It won't depend on anything else in the code
+  - It increases confidence in altering, removing, or adding new code because it would be clear what you can or cannot change
+  - You can see the potential traps
+  - The function would always produce the same output for the same set of inputs.
+
+```js
+let fixedValue = 4;
+
+function incrementer(value) {   // pass an argument to the function. The name of the argument can be arbitrary.
+    return value + 1;
+}
+
+let increasedValue = incrementer(fixedValue);
+console.log(increasedValue);    // console will display 5
+console.log(fixedValue);        // global variable 'fixedValue' is unaffected and console displays 4
+```

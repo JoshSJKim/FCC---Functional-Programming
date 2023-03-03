@@ -458,4 +458,55 @@ const ratings = watchList.map(movies => ({ // declare a new variable that will r
   "rating": movies["imdbRatings"]          // return "rating" key  with the value of "imdbRating" property from each 'movies' object
 }));
 
-console.log(JSON.stringify(ratings));
+console.log(JSON.stringify(ratings));   // console will display an array the same length as the original, with the title and rating property and values
+```
+
+## Implement map on a Prototype
+
+- ```Array.prototype.map()```, or simply ```map()``` returns an array of the same length as the one it was called on.
+- It also doesn't mutate the original array, as long as its callback function doesn't.
+
+- ```map``` is a pure function.
+  - its output depends solely on its inputs.
+  - It also takes another function as its argument.
+
+- Create ```Array.prototype.myMap()```
+- The objective is to re-create the behavior of ```Array.prototype.map()``` without using the built-in ```map()``` method
+- Use a 'for' loop and access the array instance using ```this```
+
+```js
+Array.prototype.myMap = function(callback) {
+  const newArray = [];
+  for (let i = 0; i < this.length; i++) {
+    newArray.push(callback(this[i]));
+  }
+  return newArray;
+}
+```
+
+- The above was my initial solution.
+  - myMap() is declared with a function, which takes another callback function as its argument
+  - the result will be returned in a new Array 'newArray'
+  - Use a 'for' loop to iterate through the array 'myMap' is called on.
+  - push the result of the callback function implemented on the element 'this[i]' to 'newArray'.
+  - Return 'newArray'
+- This is fine, as long as the argument passed to the callback is a single argument and returns a result of manipulating that single argument
+  
+- But the ```map()``` method takes three arguments
+  - the current element being processed
+  - the index of that element
+  - and the array upon which 'map' was called.
+- ```myMap()``` needs to be capable of receiving the above three arguments
+  - it needs to use the callback function argument to transform the original array elements to fit the ```map()``` behavior criteria
+  - it needs to apply the callback function to EACH element of the array and return new array based on the result of the function, rather than simply looping over the array.
+
+```js
+Array.prototype.myMap = function(callback) {
+  const newArray = [];
+  for (let i = 0; i < this.length; i++) {
+    const transformedElement = callback(this[i], i, this); // This line can be removed and inserted directly in to the 'push'
+    newArray.push(transformedElement);                     // newArray.push(callback(this[i], i, this));
+  }
+  return newArray;
+}
+```

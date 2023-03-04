@@ -540,7 +540,7 @@ console.log(usersUnder30); // [ { name: 'Amy', age: 20 }, { name: 'camperCat', a
 - The new array should only contain 'title' and 'rating' keys.
 - Also, it should only contain objects that have 'imdbRating' greater than or equal to 8.0
 
-- TRAP: Note that the rating values are saved as strings in the object and you may need to convert them into numbers to perform mathematical operations on them.
+- TRAP: "Note that the rating values are saved as strings in the object and you may need to convert them into numbers to perform mathematical operations on them."
 
 ```js
 // This challenge uses the same array used in the 'map' challenge above.
@@ -560,6 +560,12 @@ console.log(filteredList);
   ```
 
 - Since the instruction noted that I 'may' need to convert the string values to numerical values, I was trying to figure out how to achieve that using parseInt.
-- But it turns out, I don't need to.
-- Using comparison operators automatically converts string values to numerical values by default.
-- It does not use strict equality.
+- But it turns out, I don't need to in this situation
+- greater than or less than operators in JS can be used to compare both strings and numbers.
+- When comparing strings, JS compares them character by character based on their Unicode values.
+  - NOTE: if both values are strings, JS will not automatically convert them to numbers before comparing
+  - However, when comparing a string and a number using greater than or less than operators, JS will implicitly convert the string to a number for comparison.
+  - This is called ```type coercion```
+- However, you will need to manually convert a string to a number if situations where you need to perform arithmetic operations on the value.
+- The strings in the challenge were comprised only of numbers as strings.
+- But if you want to ensure that the comparison is based on only numerical values, you will need to convert the string to a number explicitly using methods such as parseInt() or parseFloat().

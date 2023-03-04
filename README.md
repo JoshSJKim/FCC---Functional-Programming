@@ -455,7 +455,7 @@ console.log(JSON.stringify(ratings));
 const ratings = watchList.map(movies => ({ // declare a new variable that will return a new array 'ratings'
                                            // use 'map' method on the 'watchList' array and iterate through each object 'movies'
   "title": movies["Title"],                // return "title" key with the value of "Title" property from each 'movies' object
-  "rating": movies["imdbRatings"]          // return "rating" key  with the value of "imdbRating" property from each 'movies' object
+  "rating": movies["imdbRating\"]          // return "rating" key  with the value of "imdbRating" property from each 'movies' object
 }));
 
 console.log(JSON.stringify(ratings));   // console will display an array the same length as the original, with the title and rating property and values
@@ -510,3 +510,56 @@ Array.prototype.myMap = function(callback) {
   return newArray;
 }
 ```
+
+## Use the filter Method to Extract Data from An Array
+
+- Another useful function is ```Array.prototype.filter()```, or ```filter()```
+- ```filter``` calls a function on each element of an array and returns a new array containing only the elements that return a ```true``` value.
+- In other words, it filters the array based on the function passed to it.
+- Similar to ```map```, it does not mutate the original array.
+
+- Also similar to ```map```, ```filter``` also accepts three arguments
+  - first argument is the current element being processed
+  - second is the index of that element
+  - third is the array upon which the ```filter``` method was called
+
+```js
+const users = [
+  { name: 'John', age: 34 },
+  { name: 'Amy', age: 20 },
+  { name: 'camperCat', age: 10 }
+];
+
+const usersUnder30 = users.filter(user => user.age <30);
+console.log(usersUnder30); // [ { name: 'Amy', age: 20 }, { name: 'camperCat', age: 10 }]
+```
+
+- The above example only accepts the first argument for simplicity sake
+
+- create a code using a combination of ```filter``` and ```map``` on ```watchList``` to assign a new array of objects
+- The new array should only contain 'title' and 'rating' keys.
+- Also, it should only contain objects that have 'imdbRating' greater than or equal to 8.0
+
+- TRAP: Note that the rating values are saved as strings in the object and you may need to convert them into numbers to perform mathematical operations on them.
+
+```js
+// This challenge uses the same array used in the 'map' challenge above.
+// I won't bother entering it again
+
+const highRatingList = watchList.filter(movie => movie.imdbRating >= 8.0); // Create a new array 'highRatingList' with movies with imdbRating 8.0 and higher
+const filteredList = highRatingList.map( movie => ({    // use map to iterate through the new array and return new array 'filteredList' with 'title' and 'rating'
+  "title": movie["Title"],
+  "rating": movie["imdbRating"]
+}));
+
+console.log(filteredList);
+/* [ { title: 'Inception', rating: '8.8' },
+  { title: 'Interstellar', rating: '8.6' },
+  { title: 'The Dark Knight', rating: '9.0' },
+  { title: 'Batman Begins', rating: '8.3' } ] */
+  ```
+
+- Since the instruction noted that I 'may' need to convert the string values to numerical values, I was trying to figure out how to achieve that using parseInt.
+- But it turns out, I don't need to.
+- Using comparison operators automatically converts string values to numerical values by default.
+- It does not use strict equality.

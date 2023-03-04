@@ -569,3 +569,60 @@ console.log(filteredList);
 - However, you will need to manually convert a string to a number if situations where you need to perform arithmetic operations on the value.
 - The strings in the challenge were comprised only of numbers as strings.
 - But if you want to ensure that the comparison is based on only numerical values, you will need to convert the string to a number explicitly using methods such as parseInt() or parseFloat().
+
+## Implement the filter Method on a Prototype
+
+- create ```Array.prototype.myFilter()```
+- It should behave exactly like ```filter()```
+- The code should not use the built-in ```filter()``` method
+
+```js
+Array.prototype.myFilter = function (callback) {
+  const newArray = [];
+  for (let i = 0; i < this.length; i++) {
+    if (callback(this[i], i, this) === true) {
+      newArray.push(this[i]);
+    }
+  }
+  return newArray;
+}
+```
+
+- The above was the initial solution I came up with.
+- The following are the cases that the codes needs to pass
+  - [23, 65, 98, 5, 13].myFilter(item => item % 2) should equal [23, 65, 5, 13].
+  - ["naomi", "quincy", "camperbot"].myFilter(element => element === "naomi") should return ["naomi"].
+  - [1, 1, 2, 5, 2].myFilter((element, index, array) => array.indexOf(element) === index) should return [1, 2, 5].
+
+- the latter two passed with the code shown above, but the first case did not.
+- In the code above,
+  - Array.prototype.myFilter is assigned a function that takes a 'callback' function as its argument
+  - When called, it creates a new array 'newArray' with an empty array
+  - It will iterate through the array passed using a 'for' loop.
+  - While iterating through each element, if the result of the callback function is true,
+  - that element will be pushed to the newArray
+
+- In both the second and third cases, the results return true
+  - 'naomi' === 'naomi', which is truthy value and it strictly equals to 'true'
+  - In the second case, the callback function checks if the index of the current element is equal to its first occurrence in the array.
+    - The array satisfies the condition, so it is also 'truthy value === true'
+
+- But in the first case, 'item => item % 2' returns 1 for odd numbers and 0 for even numbers
+  - This case is not looking for strictly true or false. It's looking for a truthy value.
+  - Since '0' is a falsy value, 'falsy value !== true'
+  - So the code does not pass.
+
+- So in order for the code to pass, it's sufficient if the callback function returns a truthy value.
+- There is no need to compare against a strictly equal operator.
+
+```js
+Array.prototype.myFilter = function (callback) {
+  const newArray = [];
+  for (let i = 0; i < this.length; i++) {
+    if (callback(this[i], i this)) {
+      newArray.push(this[i]);
+    }
+  }
+  return newArray;
+}
+```

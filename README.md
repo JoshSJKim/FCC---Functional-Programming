@@ -682,3 +682,21 @@ const inputCities = ['Chicago', 'Delhi', 'Islamabad', 'London', 'Berlin'];
 console.log(nonMutatingSplice(inputCities));  // ['Chicago', 'Delhi', 'Islamabad']
 console.log(inputCities);  // ['Chicago', 'Delhi', 'Islamabad', 'London', 'Berlin']; original array is not mutated
 ```
+
+## Combine Two Arrays Using the Concat Method
+
+- Concatenation means to join items end to end.
+- ```concat``` method applies the same way for both strings and arrays.
+- For arrays, the method is called on one, then another array is provided as the argument to ```concat```
+- the array passed as the argument will be added to the end of the first array.
+- It returns a new array. In other words, it does not mutate the original arrays.
+
+```js
+function nonMutatingConcat(original, attach) {
+  return original.concat(attach);
+}
+
+const first = [1, 2, 3];
+const second = [4, 5];
+console.log(nonMutatingConcat(first, second)); // [1, 2, 3, 4, 5]
+```

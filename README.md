@@ -700,3 +700,18 @@ const first = [1, 2, 3];
 const second = [4, 5];
 console.log(nonMutatingConcat(first, second)); // [1, 2, 3, 4, 5]
 ```
+
+## Add Elements to the End of an Array Using concat Instead of push
+
+- Functional programming is all about creating and using NON-MUTATING functions
+
+- The previous challenge can be solved using the ```push``` method.
+- Just like ```concat```, ```push``` adds items to the end of the same array that it is called on.
+- The difference is that ```push``` method mutates the original array.
+
+```js
+const arr = [1, 2, 3];
+arr.push(4, 5, 6);
+console.log(arr); // [1, 2, 3, 4, 5, 6] The original array 'arr' has been modified
+```
+

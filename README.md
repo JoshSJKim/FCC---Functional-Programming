@@ -626,3 +626,24 @@ Array.prototype.myFilter = function (callback) {
   return newArray;
 }
 ```
+
+## Return Part of an Array Using the Slice Method
+
+- ```slice``` method returns a copy of specified elements of an array.
+- It takes two arguments
+  - first, the index of where to begin the slice
+  - second, the index of where to end the slice
+  - Note that the end slice index is non-inclusive
+- If the parameters are left empty, it will copy the entire array from beginning to end.
+- If only one argument is entered, it will be considered the first argument.
+  - It will begin slice at the specified index to the end of the array.
+- the ```slice``` method does not mutate the original array, and it returns a new one.
+
+```js
+function sliceArray(anim, beginSlice, endSlice) {
+  return anim.slice(beginSlice, endSlice);
+}
+
+const inputAnim = ["cat", "Dog", "Tiger", "Zebra", "Ant"];
+console.log(sliceArray(inputAnim, 1, 3));  // ["Dog", "Tiger"] endSlice index 3 is non-inclusive
+```

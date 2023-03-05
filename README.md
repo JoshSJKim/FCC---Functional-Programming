@@ -647,3 +647,38 @@ function sliceArray(anim, beginSlice, endSlice) {
 const inputAnim = ["cat", "Dog", "Tiger", "Zebra", "Ant"];
 console.log(sliceArray(inputAnim, 1, 3));  // ["Dog", "Tiger"] endSlice index 3 is non-inclusive
 ```
+
+## Remove Elements from an Array Using slice Instead of splice
+
+- You can use ```splice``` to remove elements from an array and keep the rest of the array.
+- ```splice``` takes two arguments
+  - first, the index indicating where to begin removal
+  - second, the index indicating how many elements to remove
+  - If the second argument is not provided, it will remove items from the first specified index to the end of the array.
+- But the thing about ```splice``` is that it mutates the original array it is called on.
+
+```js
+const cities = ['Chicago', 'Delhi', 'Islamabad', 'London', 'Berlin'];
+console.log(cities.splice(1, 3));  // ['Chicago', 'Delhi', 'Islamabad', 'Berlin']
+```
+
+- the splice method above begins removal at index 3 (London) and removes 1 element (London)
+
+- On the other hand, the ```slice``` method can achieve the same result without mutating the original array.
+- It returns a new modified array, which can be assigned to a variable.
+- Using ```slice``` instead of ```splice```  helps avoid array-mutating side effects
+
+- Write a function using 'slice' instead of 'splice'
+- The function should limit the length of the 'cities' array to 3
+- Return a new array with only the first three elements without mutating the original array.
+
+```js
+function nonMutatingSplice(cities) {
+  let newCitiesArray = cities.slice(0, 3); // begin slice at index 0 and end at index 3, non-inclusive
+  return newCitiesArray;                   // The above variable assignment can be omitted - return cities.slice(0, 3);
+}
+
+const inputCities = ['Chicago', 'Delhi', 'Islamabad', 'London', 'Berlin'];
+console.log(nonMutatingSplice(inputCities));  // ['Chicago', 'Delhi', 'Islamabad']
+console.log(inputCities);  // ['Chicago', 'Delhi', 'Islamabad', 'London', 'Berlin']; original array is not mutated
+```

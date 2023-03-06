@@ -818,7 +818,7 @@ console.log(ascendingOrder([1, 5, 2, 3, 4])); // [1, 2, 3, 4, 5]
 - JS default sorting method is by string Unicode point value, which may return unexpected results.
 - So, it is important to provide a callback function to specify the sorting criteria.
 - Such callback functions are called ```compareFunction```.
-- When supplied, the array elements are sorted according to the condition provided by the ```comparefunction```
+- When supplied, the array elements are sorted according to the condition provided by the ```compareFunction```
 
 See the following example.
 
@@ -839,3 +839,35 @@ console.log(alphabeticalOrder(['a', 'd', 'c', 'a', 'z', 'g']));
 - if the value of 'a' is less than the value of 'b', then it indicates that 'a' comes before 'b' (i.e. index of 'a' is shifted by -1)
 - 'else' (i.e. if value of 'a' is greater than value of 'b') 'a' comes after 'b', and the index of 'a' will shift by +1.
 - The iteration process will repeat itself until all of the elements are in its place and there is nothing more to shift
+
+## Return a Sorted Array Without Changing the Original Array
+
+- A side effect of the ```sort``` method is that it mutates the original array.
+- A way to avoid this is to first concatenate an empty array to the one being sorted (slice and concat return new arrays), then run the sort method.
+
+```js
+const globalArray = [5, 6, 3, 2, 9];
+
+function nonMutatingSort(arr) {
+  let newArr = arr.slice(0);        // declare a new variable 'newArr' to copy the original 'arr' by using 'slice'
+  return newArr.sort(function(a, b) {
+    return a - b;                   // use 'compareFunction' to sort the elements of 'newArr'
+  });
+}
+
+console.log(nonMutatingSort(globalArray));  // [ 2, 3, 5, 6, 9 ]
+```
+
+- The above is the solution I came up with since I didn't really understand the concept of adding an empty array to the original to use sort afterwards.
+- The following is the method suggested by FCC
+
+```js
+function nonMutatingSort(arr) {
+  return [].concat(arr).sort(function(a, b) { 
+    return a - b;
+  });
+}
+```
+
+- in the code above, concat is used to merge an empty array with the original array to return a COPY of the original array.
+- Then the sort method is called on the copied array to execute the callback compareFunction.

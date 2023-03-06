@@ -879,7 +879,7 @@ function nonMutatingSort(arr) {
 
 ```js
 function splitify(str) {
-  const splitString = str.splitify(/\W/);
+  const splitString = str.splitify(/\W+/); // regex used as delimiter to split string by one or more non-word characters into array of words
   return splitString;
 }
 
@@ -902,8 +902,8 @@ const str = arr.join(" "); // the two elements will be joined with a space in be
 
 ```js
 function sentensify(str) {
-  let splitString = str.split(/\W/);
-  let stringSentence = splitString.join(" ");
+  let splitString = str.split(/\W+/); // regex used to split string by one or more non-word characters
+  let stringSentence = splitString.join(" "); // join all split string elements in array with a space in between the strings
   return stringSentence;
 }
 
@@ -918,3 +918,26 @@ function sentensify(str) {
   return str.split(/\W/).join(" ");
 }
 ```
+
+## Apply Functional Programming to Convert Strings to URL Slugs
+
+- Fill in the urlSlug function so it converts a string title and returns the hyphenated version for the URL.
+- You can use any of the methods covered in this section, and don't use replace.
+- Here are the requirements:
+  - The input is a string with spaces and title-cased words
+  - The output is a string with the spaces between words replaced by a hyphen (-)
+  - The output should be all lower-cased letters
+  - The output should not have any spaces
+
+```js
+function urlSlug(title) {
+  return title.trim().toLowerCase().split(/\W+/).join('-');
+}
+console.log(urlSlug(" Winter Is  Coming")); // winter-is-coming
+```
+
+- ```trim()``` method is used to remove any leading and trailing spaces from the 'title' string.
+- ```toLowerCase()``` is used to convert all characters to lowercase characters.
+- Then ```split``` is used on the transformed 'title' string to split the string by one or more non-word characters into multiple strings in an array
+- Then ```join``` is used to join each of the string elements with a '-'
+

@@ -887,3 +887,34 @@ console.log(splitify("Hello World,I-am code")); // ['Hello', 'World', 'I', 'am',
 ```
 
 - I need a refresher on regex
+
+## Combine an Array into a String Using the join Method
+
+- The ```join``` method is used to join the elements of an array together to create a string.
+- It takes an argument fro the delimiter that is used to separate the array elements in the string.
+
+```js
+const arr = ["Hello", "World"];
+const str = arr.join(" "); // the two elements will be joined with a space in between to return "Hello World"
+```
+
+- Use the join method (among others) inside the sentensify function to make a sentence from the words in the string str.
+
+```js
+function sentensify(str) {
+  let splitString = str.split(/\W/);
+  let stringSentence = splitString.join(" ");
+  return stringSentence;
+}
+
+console.log(sentensify("May-the-force-be-with-you")); // May the force be with you
+```
+
+- I am still not used to writing concise code.
+- The above can be simplified as shown below.
+
+```js
+function sentensify(str) {
+  return str.split(/\W/).join(" ");
+}
+```

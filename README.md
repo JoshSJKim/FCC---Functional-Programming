@@ -941,3 +941,22 @@ console.log(urlSlug(" Winter Is  Coming")); // winter-is-coming
 - Then ```split``` is used on the transformed 'title' string to split the string by one or more non-word characters into multiple strings in an array
 - Then ```join``` is used to join each of the string elements with a '-'
 
+## Use the every Method to Check that Every Element in an array Meets a Criteria
+
+- The ```every``` method works with arrays to check if every element passes a particular test.
+- It returns a Boolean value - true or false.
+
+```js
+function checkPositive(arr) {
+  return arr.every(function(num) {
+    return num > 0;
+  });
+}
+
+console.log(checkPositive([i, 2, 3, -4, 5])); // false
+```
+
+- when function 'checkPositive' is called with an array as its argument, it will return the result of the callback function called on the array.
+- It will iterate through the array and check if every element passes the specified test.
+- In this case, if every 'num' element is greater than 0 (i.e. positive number), it will pass the test and return true.
+- If any of the 'num' element is less than or equal to 0 (negative), it will not pass the test and return false.

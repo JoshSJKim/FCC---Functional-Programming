@@ -948,8 +948,8 @@ console.log(urlSlug(" Winter Is  Coming")); // winter-is-coming
 
 ```js
 function checkPositive(arr) {
-  return arr.every(function(num) {
-    return num > 0;
+  return arr.every(function(num) { // I initially forgot to add the 'return' on this line. Failing to add 'return' will cause the function to not return anything.
+    return num > 0;                // As a result, it will simply return 'undefined'
   });
 }
 

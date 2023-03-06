@@ -871,3 +871,19 @@ function nonMutatingSort(arr) {
 
 - in the code above, concat is used to merge an empty array with the original array to return a COPY of the original array.
 - Then the sort method is called on the copied array to execute the callback compareFunction.
+
+## Split a String into an Array Using the split Method
+
+- The ```split``` method splits a string into an array of strings.
+- it takes an argument for the delimiter, which can be a character or a regex to use to break up the string
+
+```js
+function splitify(str) {
+  const splitString = str.splitify(/\W/);
+  return splitString;
+}
+
+console.log(splitify("Hello World,I-am code")); // ['Hello', 'World', 'I', 'am', 'code']
+```
+
+- I need a refresher on regex

@@ -800,3 +800,42 @@ const squareList = arr => {
 - It first filters the array using the ```filter``` method to extract numbers that are only integers greater than 0 and return it in a new array 'positiveInt'
 - then using the ```map``` method, the elements of 'positiveInt' are multiplied by itself as it iterates and pushed into 'newArr'
 - 'newArr' is returned.
+
+## Sort an Array Alphabetically using the sort Method
+
+- The ```sort``` method sorts the elements of an array according to the callback function
+
+```js
+function ascendingOrder(arr) {
+  return arr.sort(function(a, b) {
+    return a - b;
+  });
+}
+
+console.log(ascendingOrder([1, 5, 2, 3, 4])); // [1, 2, 3, 4, 5]
+```
+
+- JS default sorting method is by string Unicode point value, which may return unexpected results.
+- So, it is important to provide a callback function to specify the sorting criteria.
+- Such callback functions are called ```compareFunction```.
+- When supplied, the array elements are sorted according to the condition provided by the ```comparefunction```
+
+See the following example.
+
+```js
+function alphabeticalOrder(arr) {
+  return arr.sort(function(a, b) {
+    return a === b? 0: a < b ? -1: 1;
+  });
+}
+
+console.log(alphabeticalOrder(['a', 'd', 'c', 'a', 'z', 'g']));
+```
+
+- function 'alphabeticalOrder' takes an array as its argument.
+- When called, ```sort``` method is called on the array with the callback function, which takes elements 'a' and 'b' of the array as its arguments.
+- As it iterates through the array, it will compare the elements in sequence and sort the according to the conditions provided in the ternary operator.
+- if the value of 'a' is strictly equal to the value of 'b', the index position will not change.
+- if the value of 'a' is less than the value of 'b', then it indicates that 'a' comes before 'b' (i.e. index of 'a' is shifted by -1)
+- 'else' (i.e. if value of 'a' is greater than value of 'b') 'a' comes after 'b', and the index of 'a' will shift by +1.
+- The iteration process will repeat itself until all of the elements are in its place and there is nothing more to shift

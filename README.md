@@ -715,3 +715,88 @@ arr.push(4, 5, 6);
 console.log(arr); // [1, 2, 3, 4, 5, 6] The original array 'arr' has been modified
 ```
 
+## Use the reduce Method to Analyze Data
+
+- ```Array.prototype.reduce()``` or ```reduce()``` is the most general of all array operations in JS.
+- Almost any array processing problem can be solved using ```reduce()```
+
+- The ```reduce``` method allows for more general forms of array processing.
+- It's possible to show that both ```filter``` and ```map``` can be derived from ```reduce```.
+- ```reduce``` method iterates over each item in an array and returns a single value (i.e. string, number, object, array).
+- This is achieved through a callback function that is called on each iteration.
+
+- The callback function accepts four arguments:
+  - first is known as the accumulator, which gets assigned the return value of the callback function from the previous iteration.
+  - second is the current element being processed
+  - third is the index of that element
+  - fourth is the array upon which ```reduce``` was called
+
+- On top of the callback function, ```reduce``` has an additional parameter, which specifies the initial value for the accumulator.
+- If this parameter is omitted, then the first iteration is skipped and the second iteration gets passed the first element of the array as the accumulator
+
+```js
+const users = [
+  { name: 'John', age: 34 },
+  { name: 'Amy', age: 20 }.
+  { name: 'camperCat', age: 10 }
+];
+
+const sumOfAges = users.reduce((sum, user) => sum + user.age, 0); // reduce is called on array 'users'. sum is the accumulator and user is the array object
+console.log(sumOfAges); // 64
+```
+
+```js
+const users = [
+  { name: 'John', age: 34 },
+  { name: 'Amy', age: 20 }.
+  { name: 'camperCat', age: 10 }
+];
+
+const usersObj = users.reduce((obj, user) => { // reduce is called on array 'users'
+  obj[user.name] = user.age;  // accumulator 'obj' gets user 'name' as property and is assigned the user 'age' as its value
+  return obj;                 // 'obj' is returned
+}, {});                       // 'obj' is pushed to empty curly brace
+console.log(usersObj);        // { John: 34, Amy: 20, camperCat: 10 }
+```
+
+- Use the 'watchList` array used previously to get the average rating of movies directed by Christopher Nolan.
+- Use ```reduce```, ```filter```, and the string values of 'imdbRating' need to be converted to numerical values for arithmetic operation
+
+```js
+function getRating(watchList) {
+  const moviesByChris = watchList.filter(movie => movie.Director === "Christopher Nolan");
+  const ratingSum = moviesByChris.reduce((sum, movie) => sum + Number(movie.imdbRating), 0); // parseFloat also works instead of 'Number'
+  console.log(ratingSum); // 34.7
+  let averageRating = ratingSum / moviesByChris.length;
+  return averageRating;
+};
+
+console.log(getRating(watchList)); // 8.675
+```
+
+- function 'getRating' takes array 'watchList' as its argument
+- variable 'moviesByChris' is declared and will filter through 'watchList' to return a new array with movies directed by Christopher Nolan
+- variable 'ratingSum' is declared and will iterate through 'watchList' to return the sum of the ratings.
+  - String values are converted to numerical values first.
+- variable 'averageRating' will return the result of 'ratingSum' divided by the length of array 'moviesByChris'.
+
+## Use Higher-Order Functions map, filter, or reduce to Solve a Complex Problem
+
+- Complete the code for the squareList function using any combination of map(), filter(), and reduce().
+- The function should return a new array containing the squares of only positive integers (decimals are not integers) when an array of real numbers is passed to it.
+- An example of an array of real numbers is [-3, 4.8, 5, 3, -3.2].
+
+```js
+const squareList = arr => {
+  const positiveInt = arr.filter(num => Number.isInteger(num) && num > 0);
+  const newArr = positiveInt.map(num => num * num);
+  return newArr;
+}
+  const squaredIntegers = squareList([-3, 4.8, 5, 3, -3.2]);
+  console.log(squaredIntegers); // [25, 9]
+```
+
+- function 'squareList' takes 'arr' as its argument
+- It first filters the array using the ```filter``` method to extract numbers that are only integers greater than 0 and return it in a new array 'positiveInt'
+- then using the ```map``` method, the elements of 'positiveInt' are multiplied by itself as it iterates and pushed into 'newArr'
+- 'newArr' is returned.

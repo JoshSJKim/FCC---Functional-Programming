@@ -960,3 +960,75 @@ console.log(checkPositive([i, 2, 3, -4, 5])); // false
 - It will iterate through the array and check if every element passes the specified test.
 - In this case, if every 'num' element is greater than 0 (i.e. positive number), it will pass the test and return true.
 - If any of the 'num' element is less than or equal to 0 (negative), it will not pass the test and return false.
+
+## Use some Method to Check that Any Element in an Array Meet a Criteria
+
+- ```some``` method works similarly to ```every```
+- while ```every``` returns true if all of the array elements pass the test, ```some``` will return true if any of the array elements pass the test.
+- if all values do not meet the criteria, it will return false.
+
+```js
+function checkPositive(arr) {
+  return arr.some(function(num) {
+    return num > 0;
+  });
+}
+
+console.log([1, 2, 3, -4, 5]); // true
+```
+
+## Introduction to Currying and Partial Application
+
+- ```arity``` of a function is the number of arguments it requires.
+- ```currying``` a function means to convert a function on N arity into N functions of arity 1.
+- In other words, it restructures a function so that it takes only one argument,
+  - then returns another function that takes the next argument, etc.
+
+```js
+function unCurried(x, y) {
+  return x + y;
+}
+```
+
+- The above example is a traditional function that takes two arguments and returns a sum of the two.
+
+```js
+function curried(x) {   // function 'curried' takes a single argument
+  return function(y) {  // it then returns another function that takes the second argument
+    return x + y;       // it then returns the sum of the two arguments
+  }
+}
+```
+
+- The above curried function can be simplified using the arrow function
+
+```js
+const curried = x => y => x + y;
+```
+
+- This is useful in coding if all of the arguments to a function are not available at one time.
+- Each function call can be saved into a variable, which will hold the returned function reference that takes the next argument when it's available.
+
+```js
+const funcForY = curried(1); // function 'curried' is saved into variable 'funcForY' and it waits for the availability of the next argument
+console.log(funcForY(2));    // second argument 2 is passed to 'funcForY' and the rest of the function is executed to return 3
+```
+
+- Similarly, ```partial application``` can be described as applying a few arguments to a function at a time and returning another function.
+- When more arguments become available, it is passed to the returned function.
+
+```js
+function impartial (x, y, z) {
+  return x + y + z;
+}
+```
+
+- The above is an example of a traditional function that takes three arguments and returns the sum of the three
+
+```js
+const partialFn = impartial.bind(this, 1, 2); 
+// function 'impartial' is called with 'bind' method which takes a reserved argument 'this' and two other arguments.
+// This function is assigned to a new variable 'partialFn'
+partialFn(10); 
+// partialFn is called with another argument 10, which is passed to complete the function execution to return 13
+```
